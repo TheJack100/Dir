@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cascading Dropdown Form</title>
+</head>
+<body>
+    <h2>Cascading Dropdown Form</h2>
+    <form>
+        <label for="continent">Continent:</label>
+        <select id="continent" onchange="updateCountries()">
+            <option value="">Select Continent</option>
+            <option value="Asia">Asia</option>
+            <option value="Europe">Europe</option>
+        </select>
+
+        <label for="country">Country:</label>
+        <select id="country">
+            <option value="">Select Country</option>
+        </select>
+    </form>
+
+    <script>
+        const countries = {
+            "Asia": ["India", "China", "Japan"],
+            "Europe": ["France", "Germany", "Spain"]
+        };
+
+        function updateCountries() {
+            const continentSelect = document.getElementById("continent");
+            const countrySelect = document.getElementById("country");
+            const selectedContinent = continentSelect.value;
+
+            countrySelect.innerHTML = '<option value="">Select Country</option>';
+
+            if (selectedContinent && countries[selectedContinent]) {
+                countries[selectedContinent].forEach(country => {
+                    const option = document.createElement("option");
+                    option.value = country;
+                    option.textContent = country;
+                    countrySelect.appendChild(option);
+                });
+            }
+        }
+    </script>
+</body>
+</html>
